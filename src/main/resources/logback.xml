@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds" debug="true">
+
+    <property name="LOGS_ABSOLUTE_PATH" value="logs"/>
+
+    <!-- 콘솔로 로그를 남김 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <!-- 로그 메시지 패턴 -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Database Section -->
+    <logger name="org.apache.commons.dbcp2" level="error" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <logger name="java.sql" level="warn" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <logger name="jdbc" level="error" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <!-- SQL문과 해당 SQL을 실행시키는데 수행된 시간 정보(milliseconds)를 포함 -->
+    <logger name="jdbc.sqltiming" level="debug" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <logger name="jdbc.resultsettable" level="info" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <!-- Hikari CP -->
+    <logger name="com.zaxxer.hikari.pool.HikariPool" level="info" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <!-- root는 글로벌 로거를 의미하며, 위의 logger에 해당하지 않으면 root 로거가 실행 -->
+    <root level="info">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>

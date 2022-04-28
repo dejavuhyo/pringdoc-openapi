@@ -1,0 +1,47 @@
+# Port
+server:
+  port: 8080
+
+springdoc:
+  swagger-ui:
+    path: /swger-ui.html
+
+spring:
+  profiles:
+    active: local
+
+---
+# local
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    jdbc-url: jdbc:log4jdbc:postgresql://localhost:5432/postgres?charSet=UTF-8
+    username: postgres
+    password: postgres
+
+---
+# dev
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    jdbc-url: jdbc:log4jdbc:postgresql://localhost:5432/postgres?charSet=UTF-8
+    username: postgres
+    password: postgres
+
+---
+# prod
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    jdbc-url: jdbc:log4jdbc:postgresql://localhost:5432/postgres?charSet=UTF-8
+    username: postgres
+    password: postgres

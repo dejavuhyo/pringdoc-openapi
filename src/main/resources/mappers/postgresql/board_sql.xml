@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.springdoc.mapper.BoardMapper">
+
+    <select id="getBoardList" resultType="com.example.springdoc.vo.BoardVO">
+        select id
+             , title
+             , contents
+             , writer
+             , reg_date
+             , view_cnt
+        from tb_board
+        order by id desc
+    </select>
+
+    <select id="searchBoardList" parameterType="com.example.springdoc.vo.BoardVO" resultType="com.example.springdoc.vo.BoardVO">
+        select id
+             , title
+             , contents
+             , writer
+             , reg_date
+             , view_cnt
+        from tb_board
+        <where>
+            <choose>
+                <when test="searchType.equalsIgnoreCase('t')">
+                    and title like CONCAT('%', #{searchWord}, '%')
+                </when>
+                <when test="searchType.equalsIgnoreCase('c')">
+                    and contents like CONCAT('%', #{searchWord}, '%')
+                </when>
+            </choose>
+        </where>
+        order by id desc
+    </select>
+
+    <select id="findBoardById" parameterType="com.example.springdoc.vo.BoardVO" resultType="com.example.springdoc.vo.BoardVO">
+        select id
+             , title
+             , contents
+             , writer
+             , reg_date
+             , view_cnt
+        from tb_board
+        where id = #{id}
+        order by id desc
+    </select>
+
+    <insert id="registerBoard" parameterType="com.example.springdoc.vo.BoardVO">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            select max(id + 1) from tb_board
+        </selectKey>
+
+        insert into tb_board ( id
+                             , title
+                             , contents
+                             , writer)
+        values ( #{id}
+               , #{title}
+               , #{contents}
+               , #{writer})
+    </insert>
+
+    <update id="updateBoard" parameterType="com.example.springdoc.vo.BoardVO">
+        update tb_board
+        set title    = #{title}
+          , contents = #{contents}
+          , writer = #{writer}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBoard" parameterType="com.example.springdoc.vo.BoardVO">
+        delete
+        from tb_board
+        where id = #{id}
+    </delete>
+
+</mapper>
