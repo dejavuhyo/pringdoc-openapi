@@ -7,7 +7,7 @@
 
 * OpenJDK 11
 
-* spring-boot 2.6.1
+* spring-boot 2.6.7
 
 * PostgreSQL 13.5
 
