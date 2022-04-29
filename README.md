@@ -1,4 +1,4 @@
-# Board Rest API
+# Springdoc Openapi
 
 ## 1. 설명
 게시판(Board) Rest API CRUD 예제이다. 포트는 8081을 사용한다.
